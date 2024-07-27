@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  webserver:
+    build: ./nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./php/src:/var/www/html
+    depends_on:
+      - php
+
+  php:
+    build: ./php
+    volumes:
+      - ./php/src:/var/www/html
+    environment:
+      - DB_HOST=db            # Service name of the database
+      - DB_USER=abdelrahman   # Database user
+      - DB_PASSWORD=123456789  # Database password
+      - DB_NAME=demo     # Database name
+      - MYSQL_TABLE=users
+
+  db:
+    build: ./mariadb
+    env_file:
+      - .env
+    volumes:
+      - ./mariadb/data:/var/lib/mysql
+
