@@ -1,3 +1,2 @@
-FROM nginx:stable-alpine
-
-COPY nginx.conf /etc/nginx/nginx.conf
+FROM nginx:latest
+COPY default.conf /etc/nginx/conf.d/
